@@ -1,13 +1,13 @@
 const APIKEY = 8420a749e7fef936a7285df4ad75588b;
 // write script to see which page they are on (i.e. which city)
+var locationName = document.getElementsByClassName('location-name');
 
 // using data parsed from the BBC website stored as var - lookup against city list and return the city id
 var id = $.getJSON( "city.list.json", function(data) {  
     // console.log( "JSON Data: " + data);
-    $.each(data, function( index, val ) {
-        if (data[index].name == value) {
-            return data[index].id
-            console.log("hi there");
+    $.each(data, function( index ) {
+        if (data[index].name == locationName) {
+            return data[index].id;
         }
     });
 });
