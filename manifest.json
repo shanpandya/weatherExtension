@@ -1,0 +1,22 @@
+{
+"manifest_version": 2,
+
+"name": "better name",
+"description": "This extension modifies the weather webpage and provides recommendation on what to wear based on the weather conditions.",
+"version": "1.0",
+
+"icons": {
+    "19" : "icon19.png",
+    "48" : "icon48.png",
+    "120" : "icon120.png"
+},
+
+"browser_action": {
+  "default_icon": "icon19.png",
+  "default_popup": "popup.html"
+},
+
+"permissions": [
+  "activeTab"
+]
+}
