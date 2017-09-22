@@ -7,6 +7,7 @@ var id = $.getJSON( "city.list.json", function(data) {
     $.each(data, function( index, val ) {
         if (data[index].name == value) {
             return data[index].id
+            console.log("hi there");
         }
     });
 });
