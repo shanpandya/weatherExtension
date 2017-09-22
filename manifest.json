@@ -16,7 +16,15 @@
   "default_popup": "popup.html"
 },
 
-"permissions": [
+"permissions":  [
   "activeTab"
-]
+],
+
+"content_scripts": [{
+      "css": ["styles.css"],
+      "js": ["content.js"],
+      "matches": ["http://www.bbc.co.uk/weather/*"]
+    }]
+
+
 }
