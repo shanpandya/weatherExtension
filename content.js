@@ -78,7 +78,7 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
     var raincoat = createImage("raincoat.png");
 
     if (rain === "Rain"){
-       message = message.concat("It's raining! Bring an umbrella/raincoat!</br>", raincoat) ;
+       message = message.concat("It's raining! Bring an umbrella/raincoat!</br>", raincoat);
    }
 
    if (rain === "Snow"){
