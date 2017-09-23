@@ -21,7 +21,7 @@
 ],
 
 "web_accessible_resources": [
-    "city.list.json"
+    "cat.jpg"
   ],
 
 "content_scripts": [{

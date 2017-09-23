@@ -59,17 +59,42 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
     var rain = data.list[0].weather[0].main;
     console.log(windSpeed, temp, rain);
 
-    var newDiv = document.createElement('div');
-    $(newDiv).attr('id', 'newContent');
-    $('.environmental-column').append(newDiv);
-    // newDiv.innerHTML = rain;
+    // var newDiv = document.createElement('div');
+    // $(newDiv).attr('id', 'newContent');
+    // $('.environmental-column').append(newDiv);
+    // // newDiv.innerHTML = rain;
 
-    var recommendation  = suggestion(temp, windSpeed, rain);
-    console.log(temp, windSpeed, rain);
-    newDiv.innerHTML = recommendation;
-    console.log("recommendation: " + recommendation);
+    var box = document.createElement('div'); // creates a box
+    $(box).attr('id', 'newDiv');
+    var parent = document.getElementsByClassName('site-masthead');
+    $(box).insertAfter(parent);
+    var image = document.createElement('div');
+    $(image).attr('id', 'image');
+    $(box).append(image);
+    // $(image).prepend('<img id="images" src="jacket.jpg" />')
+    var message = document.createElement('div');
+    $(message).attr("id", 'message');
+    $(box).append(message);
+    message.innerHTML = suggestion (temp, windSpeed, rain);
+    // $(box).append('<link rel="stylesheet" type = "text/css" href="content.css">');
+    $(box).css({
+      border: "3px solid black",
+      width: "300px",
+      padding: "10px",
+      margin: "0px 0px 15px 0px"
+      color: ""
+    });
+   $(message).css ({
+       fontSize: 15
+   });
+    });
 
- });
+    // var recommendation  = suggestion(temp, windSpeed, rain);
+    // console.log(temp, windSpeed, rain);
+    // newDiv.src = chrome.extension.getURL('cat.jpg');
+    // console.log("recommendation: " + recommendation);
+
+//  });
 
 
  function suggestion (temp, windSpeed, rain) {
@@ -81,7 +106,7 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
 
     if (temp <= 0)  message = message.concat("Ahhhhh, it's freezing wrap up real warm!<br>");//temp = very cold    
     if (temp >0 && temp < 10) message = message.concat("Brrrr... it's really cold wear layers<br>");//temp = cold
-    if (temp >=10 && temp <15)  message = message.concat("It's pretty chills, get out a coat unless you're feeling brave!<br>");//temp = very cold
+    if (temp >=10 && temp <15)  message = message.concat("It's pretty chilly, get out a coat unless you're feeling brave!<br>");//temp = very cold
     if (temp >= 15 && temp < 20) message = message.concat("Perhaps wear a jumper but a coat isn't needed<br>"); //temp warm
     if (temp >= 20  && temp <25)  message = message.concat("It's quite warm, light clothing is suggested<br>"); // temp warm
     if (temp >= 25  && temp <35)  message = message.concat("It's scorchin' hot! Light clothing and a cool beer would do nicely<br>"); // temp warm    
