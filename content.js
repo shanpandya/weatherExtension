@@ -82,12 +82,29 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
       width: "300px",
       padding: "10px",
       margin: "0px 0px 15px 0px"
-      color: ""
     });
    $(message).css ({
        fontSize: 15
    });
     });
+    
+    // var catURL = chrome.extension.getURL(cat.jpg);
+    // var cat = document.createElement('img');
+    // cat.setAttribute("src", catURL);
+    // // $(cat).attr("id", 'picture');    
+    // $("#message").append(cat);
+
+    var imgURL = chrome.extension.getURL('cat.jpg');
+    var cat = document.createElement("div");
+    cat.id = "someName";
+    var img = document.createElement("IMG");
+    img.src = imgURL;
+    cat.appendChild(img);
+    // $("#message").append(cat)
+    document.box.appendChild(cat);
+    
+
+
 
     // var recommendation  = suggestion(temp, windSpeed, rain);
     // console.log(temp, windSpeed, rain);

@@ -22,7 +22,7 @@
 
 "web_accessible_resources": [
     "cat.jpg"
-  ],
+],
 
 "content_scripts": [{
       "css": ["styles.css"],
