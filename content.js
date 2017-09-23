@@ -32,12 +32,14 @@ console.log("locationName: " + locationName);
 var pathname = window.location.pathname.split("/").pop();
 console.log("pathname: " + pathname);
 
+// legacy API call (for current weather)
+// $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data )
 // create API request based on the city id
-$.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data ) {  
+$.getJSON( "api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data ) {  
 
     var windSpeed = data.list[0].wind.speed;
     var temp = data.list[0].main.temp - 273.15;
-    // var rain = data.list[0]["precipitation mode"];
+    var rain = data.list[0]["precipitation mode"];
     console.log(windSpeed, temp);
 
     var newDiv = document.createElement('div');
@@ -59,7 +61,7 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
  function suggestion (temp, windSpeed) {
     var message = "";
 //     if (rain === "rain"){
-//        messsage.concat("It's raining! Bring an umbrella/raincoat<br>") ;
+//        message = messsage.concat("It's raining! Bring an umbrella/raincoat<br>") ;
 //    }
    //with no wind
    if (windSpeed <= 10){
