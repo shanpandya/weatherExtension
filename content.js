@@ -56,8 +56,7 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
 
     var windSpeed = data.list[0].wind.speed;
     var temp = data.list[0].main.temp - 273.15;
-    // var rain = data.list[0].weather[0].main;
-    var rain = "Rain";
+    var rain = data.list[0].weather[0].main;
     console.log(windSpeed, temp, rain);
 
     var newDiv = document.createElement('div');
@@ -68,6 +67,7 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
     var recommendation  = suggestion(temp, windSpeed, rain);
     console.log(temp, windSpeed, rain);
     newDiv.innerHTML = recommendation;
+    console.log("recommendation: " + recommendation);
 
  });
 
@@ -75,22 +75,26 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
  function suggestion (temp, windSpeed, rain) {
     var message = "";
     if (rain === "Rain"){
-       message = messsage.concat("It's raining! Bring an umbrella/raincoat!</br>") ;
+       message = message.concat("It's raining! Bring an umbrella/rainmac!<br>");
    }
    //with no wind
-   if (windSpeed <= 10){
-       if (temp >= 8 && temp < 20) message = message.concat("Wind speeds are low and temperature is");//temp = cold
-       if (temp < 8)  message = message = message.concat("Brrrr it's cold out... bring a heavy coat");//temp = very cold
-       if (temp >= 20 && temp < 30) message = message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
-       if (temp >= 30)  message = message.concat("Brrrr it's cold out... bring a heavy coat"); // temp warm
-   }
+
+    if (temp <= 0)  message = message.concat("Ahhhhh, it's freezing wrap up real warm!<br>");//temp = very cold    
+    if (temp >0 && temp < 10) message = message.concat("Brrrr... it's really cold wear layers<br>");//temp = cold
+    if (temp >=10 && temp <15)  message = message.concat("It's pretty chills, get out a coat unless you're feeling brave!<br>");//temp = very cold
+    if (temp >= 15 && temp < 20) message = message.concat("Perhaps wear a jumper but a coat isn't needed<br>"); //temp warm
+    if (temp >= 20  && temp <25)  message = message.concat("It's quite warm, light clothing is suggested<br>"); // temp warm
+    if (temp >= 25  && temp <35)  message = message.concat("It's scorchin' hot! Light clothing and a cool beer would do nicely<br>"); // temp warm    
+    if (temp >= 35)  message = message.concat("You may as well just strip... this extension is useless at this point<br>"); // temp warm
+    
+
    //with wind
-   else if (windSpeed > 10){
-       if (temp >= 8 && temp < 20) message = message.concat("Brrrr it's cold out... bring a heavy coat"); //temp = cold
-       if (temp < 8) message = message.concat("Brrrr it's cold out... bring a heavy coat") ;//temp = very cold
-       if (temp >= 20 && temp < 30) message = message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
-       if (temp >= 30) message = message.concat("Brrrr it's cold out... bring a heavy coat");//temp very warm
-   }
+   if (windSpeed >=8 && windSpeed < 10) message = message.concat("There's a slight breeze, just letting you know...<br>");
+   if (windSpeed >=10 && windSpeed <16) message = message.concat("Strong wind! Bring a wind breaker<br>");
+   if (windSpeed >=16 && windSpeed <32) message = message.concat("Strong gale! Bring a wind breaker... or just stay inside<br>");
+   if (windSpeed >=32 && windSpeed <50) message = message.concat("A storm is brewing! Be careful!<br>");
+   if (windSpeed >=50) message = message.concat("There's a hurricane! Refer to local huricane guidence<br>");
+   
    return message;
    }
 
