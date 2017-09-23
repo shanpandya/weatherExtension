@@ -56,41 +56,43 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
 
     var windSpeed = data.list[0].wind.speed;
     var temp = data.list[0].main.temp - 273.15;
-    // var rain = data.list[0]["precipitation mode"];
+    // var rain = data.list[0].weather[0].main;
+    var rain = "Rain";
+    console.log(windSpeed, temp, rain);
 
     var newDiv = document.createElement('div');
     $(newDiv).attr('id', 'newContent');
     $('.environmental-column').append(newDiv);
     // newDiv.innerHTML = rain;
 
-    function suggestion (temp, windSpeed) {
-        var message = "";
-    //     if (rain === "rain"){
-    //        messsage.concat("It's raining! Bring an umbrella/raincoat<br>") ;
-    //    }
-       //with no wind
-       if (windSpeed <= 10){
-           if (temp >= 8 && temp < 20) message = message.concat("Wind speeds are low and temperature is") ; //temp = cold
-           if (temp < 8)  message = message.concat("Brrrr it's cold out... bring a heavy coat");//temp = very cold
-           if (temp >= 20 && temp < 30) message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
-           if (temp >= 30)  message.concat("Brrrr it's cold out... bring a heavy coat"); // temp warm
-       }
-       //with wind
-       else if (windSpeed > 10){
-           if (temp >= 8 && temp < 20) message.concat("Brrrr it's cold out... bring a heavy coat"); //temp = cold
-           if (temp < 8) message.concat("Brrrr it's cold out... bring a heavy coat") ;//temp = very cold
-           if (temp >= 20 && temp < 30) message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
-           if (temp >= 30) message.concat("Brrrr it's cold out... bring a heavy coat");//temp very warm
-       }
-       return message;
-       }
-
-       var recommendation  = suggestion(temp, windSpeed);
-       newDiv.innerHTML = recommendation;
-       console.log(windSpeed, temp);
+    var recommendation  = suggestion(temp, windSpeed, rain);
+    console.log(temp, windSpeed, rain);
+    newDiv.innerHTML = recommendation;
 
  });
 
+
+ function suggestion (temp, windSpeed, rain) {
+    var message = "";
+    if (rain === "Rain"){
+       message = messsage.concat("It's raining! Bring an umbrella/raincoat!</br>") ;
+   }
+   //with no wind
+   if (windSpeed <= 10){
+       if (temp >= 8 && temp < 20) message = message.concat("Wind speeds are low and temperature is");//temp = cold
+       if (temp < 8)  message = message = message.concat("Brrrr it's cold out... bring a heavy coat");//temp = very cold
+       if (temp >= 20 && temp < 30) message = message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
+       if (temp >= 30)  message = message.concat("Brrrr it's cold out... bring a heavy coat"); // temp warm
+   }
+   //with wind
+   else if (windSpeed > 10){
+       if (temp >= 8 && temp < 20) message = message.concat("Brrrr it's cold out... bring a heavy coat"); //temp = cold
+       if (temp < 8) message = message.concat("Brrrr it's cold out... bring a heavy coat") ;//temp = very cold
+       if (temp >= 20 && temp < 30) message = message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
+       if (temp >= 30) message = message.concat("Brrrr it's cold out... bring a heavy coat");//temp very warm
+   }
+   return message;
+   }
 
 
 
