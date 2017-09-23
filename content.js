@@ -33,17 +33,49 @@ var pathname = window.location.pathname.split("/").pop();
 console.log("pathname: " + pathname);
 
 // create API request based on the city id
-var raw = $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data ) {
-   return data
+$.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data ) {  
+
+    var windSpeed = data.list[0].wind.speed;
+    var temp = data.list[0].main.temp - 273.15;
+    var rain = data.list[0].precipitation.mode;
+
+    var newDiv = document.createElement('div');
+    $(newDiv).attr('id', 'newContent');
+    $('.environmental-column').append(newDiv);
+    // newDiv.innerHTML = rain;
+
+    if (rain === "rain"){
+        return "umbrella and raincoat strongly recommended";
+    }
+    //with no wind
+    if (windy < 10 && windy){
+        if (temp > 8 && temp < 20) return "light jacket and jeans"; //temp = cold
+        if (temp < 8) return "heavy jacket and scarf";//temp = very cold
+        if (temp > 20 && temp < 30) return "t-shirt and jeans"; //temp warm
+        if (temp > 30) return "t-shirt and shorts";//temp very warm
+    }
+    //with wind
+    else if (windy > 10){
+        if (temp > 8 && temp < 20) return "heavy jacket and scarf"; //temp = cold
+        if (temp < 8) return "heavy jacket, sweater, scarf, and earwarmers";//temp = very cold
+        if (temp > 20 && temp < 30) return "light jacket and jeans"; //temp warm
+        if (temp > 30) return "t-shirt and jeans";//temp very warm
+    }
+
+
+
+
  });
+ 
+ // console.log(raw);
 
 
  //var windy = raw.list.wind.speed;
  
-var rain = raw.list[0].main.humidity;
+// var rain = data.list.main.temp; 
 
- var newDiv = document.createElement('div');
- $(newDiv).attr('id', 'newContent');
- $('.environmental-column').append(newDiv);
+//  var newDiv = document.createElement('div');
+//  $(newDiv).attr('id', 'newContent');
+//  $('.environmental-column').append(newDiv);
 
- newDiv.innerHTML = rain;
+//  newDiv.innerHTML = rain;
