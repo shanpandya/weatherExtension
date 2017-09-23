@@ -56,8 +56,8 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
 
     var windSpeed = data.list[0].wind.speed;
     var temp = data.list[0].main.temp - 273.15;
-    // var rain = data.list[0].weather[0].main;
-    var rain = "Rain";
+    var rain = data.list[0].weather[0].main;
+
     console.log(windSpeed, temp, rain);
 
     var newDiv = document.createElement('div');
@@ -75,14 +75,11 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
  function suggestion (temp, windSpeed, rain) {
     var message = "";
     if (rain === "Rain"){
-       message = messsage.concat("It's raining! Bring an umbrella/raincoat!</br>") ;
+       message = message.concat("It's raining! Bring an umbrella/raincoat!</br>") ;
    }
-   //with no wind
-   if (windSpeed <= 10){
-       if (temp >= 8 && temp < 20) message = message.concat("Wind speeds are low and temperature is");//temp = cold
-       if (temp < 8)  message = message = message.concat("Brrrr it's cold out... bring a heavy coat");//temp = very cold
-       if (temp >= 20 && temp < 30) message = message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
-       if (temp >= 30)  message = message.concat("Brrrr it's cold out... bring a heavy coat"); // temp warm
+
+   if (rain === "Snow"){
+     message = message.concat("Do you want to build a snowman?</br>");
    }
    //with wind
    else if (windSpeed > 10){
