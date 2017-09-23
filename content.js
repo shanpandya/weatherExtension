@@ -7,7 +7,6 @@ console.log("locationName: " + locationName);
 // console.log("the script is running");
 // console.log("API key: " + API);
 
-<<<<<<< HEAD
 
 var ID = $.getJSON(chrome.extension.getURL("city.list.json"), function(data) {
     // console.log( "JSON Data: " + data);
@@ -26,10 +25,9 @@ console.log("location id: " + ID);
 
 // list of variables we want to store things in
 var raw;
-=======
 // var name;
 // var ID;
-// var random = $.getJSON(chrome.extension.getURL("city.list.json"), function(data) {  
+// var random = $.getJSON(chrome.extension.getURL("city.list.json"), function(data) {
 //     // console.log( "JSON Data: " + data);
 //     $.each(data, function(index) {
 //         // console.log("index: " + index)
@@ -51,10 +49,10 @@ var raw;
 // get pathname (i.e. id)
 var pathname = window.location.pathname.split("/").pop();
 console.log("pathname: " + pathname);
->>>>>>> 13f672d4840d8a6147e37b4aa9139851158fdeef
+
 
 // create API request based on the city id
-$.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data ) {  
+$.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data ) {
 
     var windSpeed = data.list[0].wind.speed;
     var temp = data.list[0].main.temp - 273.15;
@@ -65,15 +63,15 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
     $('.environmental-column').append(newDiv);
     // newDiv.innerHTML = rain;
 
-    function suggestion ( temp, windSpeed) {
-        var message;
+    function suggestion (temp, windSpeed) {
+        var message = "";
     //     if (rain === "rain"){
     //        messsage.concat("It's raining! Bring an umbrella/raincoat<br>") ;
     //    }
        //with no wind
        if (windSpeed <= 10){
-           if (temp >= 8 && temp < 20) message.concat("Wind speeds are low and temperature is") ; //temp = cold
-           if (temp < 8)  message.concat("Brrrr it's cold out... bring a heavy coat");//temp = very cold
+           if (temp >= 8 && temp < 20) message = message.concat("Wind speeds are low and temperature is") ; //temp = cold
+           if (temp < 8)  message = message.concat("Brrrr it's cold out... bring a heavy coat");//temp = very cold
            if (temp >= 20 && temp < 30) message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
            if (temp >= 30)  message.concat("Brrrr it's cold out... bring a heavy coat"); // temp warm
        }
@@ -87,33 +85,23 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
        return message;
        }
 
-       var recommendation  = suggestion();
+       var recommendation  = suggestion(temp, windSpeed);
        newDiv.innerHTML = recommendation;
        console.log(windSpeed, temp);
 
  });
 
- 
 
 
- 
+
+
  // console.log(raw);
 
 
  //var windy = raw.list.wind.speed;
- 
-// var rain = data.list.main.temp; 
+
+// var rain = data.list.main.temp;
 
 //  var newDiv = document.createElement('div');
 //  $(newDiv).attr('id', 'newContent');
 //  $('.environmental-column').append(newDiv);
-
-<<<<<<< HEAD
-<<<<<<< HEAD
- newDiv.innerHTML = 'test aujfbsad.khjfhcsdlhjfcbsdklj bcdjlf bcsdjkcnjdkjbvckdsjcsjdbfjhdfbvsdhjbckhjbsdvjhbsdvjkhsd'
-=======
- newDiv.innerHTML = rain;
->>>>>>> 13f672d4840d8a6147e37b4aa9139851158fdeef
-=======
-//  newDiv.innerHTML = rain;
->>>>>>> 87f0ca4dceb4d9ada19fe9279194a93e0226d39f
