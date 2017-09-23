@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
 
-"name": "better name",
+"name": "Thunderwear",
 "description": "This extension modifies the weather webpage and provides recommendation on what to wear based on the weather conditions.",
 "version": "1.0",
 
@@ -20,11 +20,21 @@
   "activeTab"
 ],
 
+"web_accessible_resources": [
+    "city.list.json"
+  ],
+
 "content_scripts": [{
       "css": ["styles.css"],
-      "js": ["content.js"],
-      "matches": ["http://www.bbc.co.uk/weather/*"]
-    }]
+      "js": ["jquery-3.2.1.js", "content.js"],
+      "matches": ["http://www.bbc.co.uk/weather/*", "http://*/*", "https://*/*"]
+    }],
+    
+"background":
+    {
+        "scripts": ["jquery-3.2.1.js"]
+    }
+
 
 
 }
