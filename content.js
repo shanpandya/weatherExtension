@@ -54,21 +54,66 @@ console.log("pathname: " + pathname);
 >>>>>>> 13f672d4840d8a6147e37b4aa9139851158fdeef
 
 // create API request based on the city id
-var raw = $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data ) {
-   return data
+$.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&APPID=" + APIKEY, function( data ) {  
+
+    var windSpeed = data.list[0].wind.speed;
+    var temp = data.list[0].main.temp - 273.15;
+    // var rain = data.list[0]["precipitation mode"];
+
+    var newDiv = document.createElement('div');
+    $(newDiv).attr('id', 'newContent');
+    $('.environmental-column').append(newDiv);
+    // newDiv.innerHTML = rain;
+
+    function suggestion ( temp, windSpeed) {
+        var message;
+    //     if (rain === "rain"){
+    //        messsage.concat("It's raining! Bring an umbrella/raincoat<br>") ;
+    //    }
+       //with no wind
+       if (windSpeed <= 10){
+           if (temp >= 8 && temp < 20) message.concat("Wind speeds are low and temperature is") ; //temp = cold
+           if (temp < 8)  message.concat("Brrrr it's cold out... bring a heavy coat");//temp = very cold
+           if (temp >= 20 && temp < 30) message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
+           if (temp >= 30)  message.concat("Brrrr it's cold out... bring a heavy coat"); // temp warm
+       }
+       //with wind
+       else if (windSpeed > 10){
+           if (temp >= 8 && temp < 20) message.concat("Brrrr it's cold out... bring a heavy coat"); //temp = cold
+           if (temp < 8) message.concat("Brrrr it's cold out... bring a heavy coat") ;//temp = very cold
+           if (temp >= 20 && temp < 30) message.concat("Brrrr it's cold out... bring a heavy coat"); //temp warm
+           if (temp >= 30) message.concat("Brrrr it's cold out... bring a heavy coat");//temp very warm
+       }
+       return message;
+       }
+
+       var recommendation  = suggestion();
+       newDiv.innerHTML = recommendation;
+       console.log(windSpeed, temp);
+
  });
+
+ 
+
+
+ 
+ // console.log(raw);
 
 
  //var windy = raw.list.wind.speed;
  
-var rain = raw.list[0].main.humidity;
+// var rain = data.list.main.temp; 
 
- var newDiv = document.createElement('div');
- $(newDiv).attr('id', 'newContent');
- $('.environmental-column').append(newDiv);
+//  var newDiv = document.createElement('div');
+//  $(newDiv).attr('id', 'newContent');
+//  $('.environmental-column').append(newDiv);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
  newDiv.innerHTML = 'test aujfbsad.khjfhcsdlhjfcbsdklj bcdjlf bcsdjkcnjdkjbvckdsjcsjdbfjhdfbvsdhjbckhjbsdvjhbsdvjkhsd'
 =======
  newDiv.innerHTML = rain;
 >>>>>>> 13f672d4840d8a6147e37b4aa9139851158fdeef
+=======
+//  newDiv.innerHTML = rain;
+>>>>>>> 87f0ca4dceb4d9ada19fe9279194a93e0226d39f
