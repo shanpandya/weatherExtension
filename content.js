@@ -3,11 +3,6 @@ var APIKEY = "8420a749e7fef936a7285df4ad75588b";
 var locationName = document.getElementsByClassName('location-name')[0].innerHTML;
 console.log("locationName: " + locationName);
 
-// using data parsed from the BBC website stored as var - lookup against city list and return the city id
-// console.log("the script is running");
-// console.log("API key: " + API);
-
-
 var ID = $.getJSON(chrome.extension.getURL("city.list.json"), function(data) {
     // console.log( "JSON Data: " + data);
     $.each(data, function(index) {
@@ -23,29 +18,6 @@ console.log(ID);
 
 console.log("location id: " + ID);
 
-// list of variables we want to store things in
-var raw;
-// var name;
-// var ID;
-// var random = $.getJSON(chrome.extension.getURL("city.list.json"), function(data) {
-//     // console.log( "JSON Data: " + data);
-//     $.each(data, function(index) {
-//         // console.log("index: " + index)
-//         // console.log(data[index].name);
-//         if (data[index].name === locationName && data[index].country == "GB") {
-//             console.log("got into the if statement");
-//             console.log("id in if statement: " + data[index].id);
-//             ID = data[index].id;
-//             return ID;
-//         }
-//     });
-// });
-
-// var temp = random;
-// console.log("random: " + random);
-// console.log ("location ID: " + ID)
-
-
 // get pathname (i.e. id)
 var pathname = window.location.pathname.split("/").pop();
 console.log("pathname: " + pathname);
@@ -59,12 +31,9 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
     var rain = data.list[0].weather[0].main;
     console.log(windSpeed, temp, rain);
 
-    // var newDiv = document.createElement('div');
-    // $(newDiv).attr('id', 'newContent');
-    // $('.environmental-column').append(newDiv);
-    // // newDiv.innerHTML = rain;
-
-    var box = document.createElement('div'); // creates a box
+    
+    // create box with information
+    var box = document.createElement('div');
     $(box).attr('id', 'newDiv');
     var parent = document.getElementsByClassName('site-masthead');
     $(box).insertAfter(parent);
@@ -80,7 +49,7 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
     $(message).attr("id", 'message');
     $(box).append(message);
     message.innerHTML = suggestion (temp, windSpeed, rain);
-    // $(box).append('<link rel="stylesheet" type = "text/css" href="content.css">');
+    
     var image = document.createElement('div');
     $(image).attr('id', 'image');
     $(box).append(image);
@@ -96,13 +65,6 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
        'color': 'white'
    });
     });
-
-    // var recommendation  = suggestion(temp, windSpeed, rain);
-    // console.log(temp, windSpeed, rain);
-    // newDiv.src = chrome.extension.getURL('cat.jpg');
-    // console.log("recommendation: " + recommendation);
-
-//  });
 
 
  function suggestion (temp, windSpeed, rain) {
@@ -130,17 +92,3 @@ $.getJSON( "http://api.openweathermap.org/data/2.5/forecast?id=" + pathname + "&
 
    return message;
    }
-
-
-
-
- // console.log(raw);
-
-
- //var windy = raw.list.wind.speed;
-
-// var rain = data.list.main.temp;
-
-//  var newDiv = document.createElement('div');
-//  $(newDiv).attr('id', 'newContent');
-//  $('.environmental-column').append(newDiv);
